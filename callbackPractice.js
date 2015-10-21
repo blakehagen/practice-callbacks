@@ -65,10 +65,17 @@ last(names, function(lastName){
 
 
   //Code Here for multiply
+  
+var multiply = function(num1,num2, cb){
+  var answer = num1 * num2;
+  return cb(answer);
+}  
 
 multiply(4, 3, function(answer){
   console.log('The answer is ' + answer); //should console.log 12
 })
+
+// returns --> "The answer is 12""
 
 
 
@@ -81,13 +88,24 @@ multiply(4, 3, function(answer){
 
 
   //Code Here for contains
+  
+  
+function contains(arr, target, cb){
+  for(var i = 0; i < arr.length; i++){
+    if(arr[i] === target){
+      return cb(target, true);
+    }
+  }
+   return cb(target, false);
+}
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
-contains(names, 'Colt', function(result){
+
+contains(names, 'Colt', function(target,result){
   if(result === true){
-    console.log('Colt is in the array');
+    console.log(target + ' is in the array');
   } else {
-    console.log('Colt is not in the array');
+    console.log(target + ' is NOT in the array');
   }
 });
 
@@ -101,6 +119,20 @@ contains(names, 'Colt', function(result){
 
 
     //Code Here for uniq
+    
+function uniq(arr, cb){
+  arr = arr.sort(function(a,b){
+    return a-b;
+  });
+  
+  for(var i = 0; i < arr.length; i++){
+    if(arr[i] === arr[i+1]){
+      arr.splice(i);
+    }
+    i--;
+  }
+  return cb(arr);
+}
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 uniq(names, function(uniqArr){
